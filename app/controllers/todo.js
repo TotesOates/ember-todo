@@ -32,6 +32,7 @@ export default Controller.extend({
 
     cancelEdit(){
       this.set('isEditing', false);
+      console.log('hi');
     },
 
     updateItem(item){
@@ -40,7 +41,6 @@ export default Controller.extend({
         item.set('description', item.description);
         item.set('updatedOn', new Date());
       });
-      this.set('isEditing', false);
     },
   },
 });
