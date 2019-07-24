@@ -5,7 +5,8 @@ export default Controller.extend({
   itemTitle: '',
   itemDescription: '',
   isDisabled: empty('itemTitle'),
-
+  isEditing: false,
+  
   actions: {
     submitForm(){
       let item = this.store.createRecord('item', {
@@ -25,14 +26,21 @@ export default Controller.extend({
       });
     },
 
+    editingItem() {
+      this.toggleProperty('isEditing');
+    },
+
+    cancelEdit(){
+      this.set('isEditing', false);
+    },
+
     updateItem(item){
-      let itemTitle = this.get('itemTitle');
-      let itemDescription = this.get('itemDescription');
       this.store.findRecord('item', item.id, { backgroundReload: false }).then(function(item){
-        item.set('title', itemTitle);
-        item.set('description', itemDescription);
+        item.set('title', item.title);
+        item.set('description', item.description);
         item.set('updatedOn', new Date());
       });
+      this.set('isEditing', false);
     },
   },
 });
