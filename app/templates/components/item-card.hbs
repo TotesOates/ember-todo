@@ -1,1 +1,35 @@
-{{yield}}
+{{#paper-card as |card|}}
+    {{#card.title as |title|}}
+      {{#title.text as |text|}}
+        <span>Title</span>
+        {{#if isEditing}}
+          <Input @value={{item.title}} @autofocus={{true}} @required={{true}} />
+        {{else}}
+          {{#text.headline}}{{item.title}}{{/text.headline}}
+        {{/if}}
+
+        {{#if item.description}}
+          <span>Description:</span>
+          {{#if isEditing}}
+            <Input @value={{item.description}} />
+            {{else}}
+              {{#text.subhead}}{{item.description}}{{/text.subhead}}
+          {{/if}}
+        {{/if}}
+
+        <p>Created On: {{item.publishedOn}}</p>
+    {{#if item.updatedOn}}
+      <p>Updated On: {{item.updatedOn}}</p>
+    {{/if}}
+      {{/title.text}}
+    {{/card.title}}
+    {{#card.actions}}
+      {{#if isEditing}}
+          {{#paper-button onClick=@cancelEdit}}Cancel{{/paper-button}}
+          {{#paper-button onClick=@updateItem}}Submit{{/paper-button}}
+        {{else}}
+        {{#paper-button onClick=@deleteItem}}Delete{{/paper-button}}
+          {{#paper-button onClick=@editingItem}} Edit {{/paper-button}}
+      {{/if}}
+    {{/card.actions}}
+  {{/paper-card}}

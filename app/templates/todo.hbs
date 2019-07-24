@@ -5,39 +5,13 @@
 <BsButton @onClick={{action "submitForm"}} @disabled={{isDisabled}}>Submit Task</BsButton>
 
 {{#each this.model as |item|}}
-  {{#paper-card as |card|}}
-    {{#card.title as |title|}}
-      {{#title.text as |text|}}
-        <span>Title</span>
-        {{#if isEditing}}
-          <Input @value={{item.title}} @autofocus={{true}} @required={{true}} />
-        {{else}}
-          {{#text.headline}}{{item.title}}{{/text.headline}}
-        {{/if}}
-
-        {{#if item.description}}
-          <span>Description:</span>
-          {{#if isEditing}}
-            <Input @value={{item.description}} />
-            {{else}}
-              {{#text.subhead}}{{item.description}}{{/text.subhead}}
-          {{/if}}
-        {{/if}}
-
-        <p>Created On: {{item.publishedOn}}</p>
-    {{#if item.updatedOn}}
-      <p>Updated On: {{item.updatedOn}}</p>
-    {{/if}}
-      {{/title.text}}
-    {{/card.title}}
-    {{#card.actions}}
-      {{#if isEditing}}
-          {{#paper-button onClick=(action 'cancelEdit')}}Cancel{{/paper-button}}
-          {{#paper-button onClick=(action "updateItem" item)}}Submit{{/paper-button}}
-        {{else}}
-        {{#paper-button onClick=(action "deleteItem" item)}}Delete{{/paper-button}}
-          {{#paper-button onClick=(action 'editingItem')}} Edit {{/paper-button}}
-      {{/if}}
-    {{/card.actions}}
-  {{/paper-card}}
+  <ItemCard 
+    @item={{item}} 
+    @isDisabled={{this.isDisabled}}
+    @deleteItem={{action 'deleteItem' item}}
+    @editingItem={{action 'editingItem'}}
+    @cancelEdit={{action 'cancelEdit'}}
+    @updateItem={{action 'updateItem' item}}
+    @isEditing={{this.isEditing}}
+  />
 {{/each}}
