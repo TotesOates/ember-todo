@@ -1,7 +1,7 @@
 <h1> TODO APP</h1>
 
-<Input @value={{this.itemTitle}} @autofocus={{true}} @placeholder='Type in your item' @required={{true}} />
-<Input @value={{this.itemDescription}} @placeholder='Type in your description'/>
+<Input @value={{this.itemTitle}} @autofocus={{true}} @placeholder="Type in your item" @required={{true}} />
+<Input @value={{this.itemDescription}} @placeholder="Type in your description"/>
 <BsButton @onClick={{action "submitForm"}} @disabled={{isDisabled}}>Submit Task</BsButton>
 {{#paper-switch value=sortBy onChange=(action (mut sortBy))}}
   {{if sortBy 'Most Recent' 'Oldest'}}
@@ -12,10 +12,10 @@
     <ItemCard 
       @item={{item}} 
       @isDisabled={{this.isDisabled}}
-      @deleteItem={{action 'deleteItem' item}}
-      @editingItem={{action 'editingItem'}}
-      @cancelEdit={{action 'cancelEdit' item}}
-      @updateItem={{action 'updateItem' item}}
+      @deleteItem={{action "deleteItem" item}}
+      @editingItem={{action "editingItem"}}
+      @cancelEdit={{action "cancelEdit" item}}
+      @updateItem={{action "updateItem" item}}
     />
   {{/each}}
 {{else}}
@@ -23,10 +23,10 @@
     <ItemCard 
       @item={{item}} 
       @isDisabled={{this.isDisabled}}
-      @deleteItem={{action 'deleteItem' item}}
-      @editingItem={{action 'editingItem'}}
-      @cancelEdit={{action 'cancelEdit' item}}
-      @updateItem={{action 'updateItem' item}}
+      @deleteItem={{action "deleteItem" item}}
+      @editingItem={{action "editingItem"}}
+      @cancelEdit={{action "cancelEdit" item}}
+      @updateItem={{action "updateItem" item}}
     />
   {{/each}}
 {{/if}}
