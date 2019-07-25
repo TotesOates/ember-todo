@@ -2,7 +2,8 @@ import Component from '@ember/component';
 
 export default Component.extend({
     isEditing: false,
-
+    isFinished: false,
+    
     actions: {
         updateItem(){
             this.updateItem();

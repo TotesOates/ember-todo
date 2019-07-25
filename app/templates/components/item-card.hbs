@@ -8,6 +8,10 @@
         {{#text.headline}}{{item.title}}{{/text.headline}}
       {{/if}}
 
+      {{#paper-checkbox value=isFinished onChange=(action (mut isFinished))}}
+        {{if isFinished 'Complete' 'Not Complete'}}
+      {{/paper-checkbox}}
+
       {{#if item.description}}
         <span>Description:</span>
         {{#if isEditing}}

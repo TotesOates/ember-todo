@@ -6,6 +6,7 @@ export default Controller.extend({
   itemDescription: '',
   isDisabled: empty('itemTitle'),
   isEditing: false,
+  sortBy: true,
   
   actions: {
     submitForm(){
