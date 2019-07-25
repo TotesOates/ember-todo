@@ -4,7 +4,7 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'todo-app',
     environment,
-    rootURL: '/todo',
+    rootURL: '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
