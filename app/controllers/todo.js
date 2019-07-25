@@ -30,9 +30,9 @@ export default Controller.extend({
       this.toggleProperty('isEditing');
     },
 
-    cancelEdit(){
+    cancelEdit(item){
+      item.rollbackAttributes();
       this.set('isEditing', false);
-      console.log('hi');
     },
 
     updateItem(item){
