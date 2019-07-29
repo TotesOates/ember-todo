@@ -18,8 +18,8 @@
   {{/paper-switch}}
   </div>
 </div>
-{{#if (lte item.length 0) }}
-  <h1>NO TASKS</h1>
+{{#if (lte model.length 0) }}
+  <h1 class='text-center'>NO TASKS</h1>
 {{else}}
   {{#if sortBy}}
     {{#each (sort-by "publishedOn:desc" this.model) as |item|}}
