@@ -1,17 +1,21 @@
-<h1> TODO APP</h1>
+<h1 class='text-center'> TODO APP</h1>
+<div class='flex-1 justify-around'>
+  <Input 
+    @value={{this.itemTitle}}  
+    @autofocus={{true}} 
+    @placeholder="Type in your item" 
+    @required={{true}} 
+  />
+  <Input @value={{this.itemDescription}} @placeholder="Type in your description"/>
+</div>
 
-<Input 
-  @value={{this.itemTitle}}  
-  @autofocus={{true}} 
-  @placeholder="Type in your item" 
-  @required={{true}} 
-/>
-<Input 
-@value={{this.itemDescription}} @placeholder="Type in your description"/>
-<BsButton @onClick={{action "submitForm"}} @disabled={{isDisabled}}>Submit Task</BsButton>
-{{#paper-switch value=sortBy onChange=(action (mut sortBy))}}
-  {{if sortBy 'Most Recent' 'Oldest'}}
-{{/paper-switch}}
+<div class='inline-block'>
+  <BsButton @onClick={{action "submitForm"}} @disabled={{isDisabled}}>Submit Task</BsButton>
+
+  {{#paper-switch value=sortBy onChange=(action (mut sortBy))}}
+    {{if sortBy 'Most Recent' 'Oldest'}}
+  {{/paper-switch}}
+</div>
 
 {{#if sortBy}}
   {{#each (sort-by "publishedOn:desc" this.model) as |item|}}
