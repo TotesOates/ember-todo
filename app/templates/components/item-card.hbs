@@ -1,29 +1,45 @@
 {{#paper-card as |card|}}
   {{#card.title as |title|}}
     {{#title.text as |text|}}
-      <span>Title</span>
-      {{#if isEditing}}
-        <Input @value={{item.title}} @autofocus={{true}} @required={{true}} />
-      {{else}}
-        {{#text.headline}}{{item.title}}{{/text.headline}}
-      {{/if}}
-
-      {{#paper-checkbox value=isFinished onChange=(action (mut isFinished))}}
-        {{if isFinished 'Complete' 'Not Complete'}}
+      <div class='flex flex-row-reverse'>
+        {{#paper-checkbox value=isFinished onChange=(action (mut isFinished))}}
+        {{if isFinished 'Complete' 'Incomplete'}}
       {{/paper-checkbox}}
-
-      {{#if item.description}}
-        <span>Description:</span>
+      </div>
+      <span class='font-bold'>Title:</span>
         {{#if isEditing}}
-          <Input @value={{item.description}} />
+          {{paper-input 
+            class="flex-100" 
+            label="Title" 
+            placeholder="Enter Title" 
+            value=item.title
+            required=true 
+            onChange=(action (mut item.title))
+          }}
         {{else}}
-          {{#text.subhead}}{{item.description}}{{/text.subhead}}
+          {{#text.headline class='text-base'}}{{item.title}}{{/text.headline}}
+        {{/if}}
+      
+      {{#if item.description}}
+        <span class='font-bold'>Description:</span>
+        {{#if isEditing}}
+          {{paper-input 
+            textarea=true 
+            block=true 
+            label="Description" 
+            maxlength=150 
+            passThru=(hash rows=3 maxRows=3)
+            value=item.description
+            onChange=(action (mut item.description))
+          }}
+        {{else}}
+          {{#text.headline class='text-base'}}{{item.description}}{{/text.headline}}
         {{/if}}
       {{/if}}
 
-    <p>Created On: {{item.publishedOn}}</p>
+    <p class='text-sm pt-12'>Created On: {{publishedTime}}</p>
     {{#if item.updatedOn}}
-      <p>Updated On: {{item.updatedOn}}</p>
+      <p class='text-sm'>Updated On: {{item.updatedOn}}</p>
     {{/if}}
       {{/title.text}}
     {{/card.title}}

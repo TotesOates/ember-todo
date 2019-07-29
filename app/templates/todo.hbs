@@ -1,13 +1,14 @@
 <h1 class='text-center'> TODO APP</h1>
 <div class='flex-1 justify-around'>
+  <label>Title*</label>
   <Input 
     @value={{this.itemTitle}}  
     @autofocus={{true}} 
     @placeholder="Type in your item" 
     @required={{true}} 
   />
+  <lable>Description</lable>
   <Input @value={{this.itemDescription}} @placeholder="Type in your description"/>
-</div>
 
 <div class='inline-block'>
   <BsButton @onClick={{action "submitForm"}} @disabled={{isDisabled}}>Submit Task</BsButton>
@@ -15,28 +16,32 @@
   {{#paper-switch value=sortBy onChange=(action (mut sortBy))}}
     {{if sortBy 'Most Recent' 'Oldest'}}
   {{/paper-switch}}
+  </div>
 </div>
-
-{{#if sortBy}}
-  {{#each (sort-by "publishedOn:desc" this.model) as |item|}}
-    <ItemCard 
-      @item={{item}} 
-      @isDisabled={{this.isDisabled}}
-      @deleteItem={{action "deleteItem" item}}
-      @editingItem={{action "editingItem"}}
-      @cancelEdit={{action "cancelEdit" item}}
-      @updateItem={{action "updateItem" item}}
-    />
-  {{/each}}
+{{#if (lte item.length 0) }}
+  <h1>NO TASKS</h1>
 {{else}}
-  {{#each this.model as |item|}}
-    <ItemCard 
-      @item={{item}} 
-      @isDisabled={{this.isDisabled}}
-      @deleteItem={{action "deleteItem" item}}
-      @editingItem={{action "editingItem"}}
-      @cancelEdit={{action "cancelEdit" item}}
-      @updateItem={{action "updateItem" item}}
-    />
-  {{/each}}
+  {{#if sortBy}}
+    {{#each (sort-by "publishedOn:desc" this.model) as |item|}}
+      <ItemCard 
+        @item={{item}} 
+        @isDisabled={{this.isDisabled}}
+        @deleteItem={{action "deleteItem" item}}
+        @editingItem={{action "editingItem"}}
+        @cancelEdit={{action "cancelEdit" item}}
+        @updateItem={{action "updateItem" item}}
+      />
+    {{/each}}
+  {{else}}
+    {{#each this.model as |item|}}
+      <ItemCard 
+        @item={{item}} 
+        @isDisabled={{this.isDisabled}}
+        @deleteItem={{action "deleteItem" item}}
+        @editingItem={{action "editingItem"}}
+        @cancelEdit={{action "cancelEdit" item}}
+        @updateItem={{action "updateItem" item}}
+      />
+    {{/each}}
+  {{/if}}
 {{/if}}
