@@ -1,23 +1,26 @@
 <h1 class='text-center'> TODO APP</h1>
-<div class='flex-1 justify-around'>
-  <label>Title*</label>
-  <Input 
-    @value={{this.itemTitle}}  
-    @autofocus={{true}} 
-    @placeholder="Type in your item" 
-    @required={{true}} 
-  />
-  <lable>Description</lable>
+  <div class='flex justify-around'>
+  <div>
+    <label>Title*</label>
+    <Input 
+      @value={{this.itemTitle}}  
+      @autofocus={{true}} 
+      @placeholder="Type in your item" 
+      @required={{true}} 
+    />
+  </div>
+  <button {{action "submitForm"}} disabled={{isDisabled}}>Submit Task</button>
+  </div>
+
+  <div class='flex justify-around'>
+  <label>Description</label>
   <Input @value={{this.itemDescription}} @placeholder="Type in your description"/>
-
-<div class='inline-block'>
-  <BsButton @onClick={{action "submitForm"}} @disabled={{isDisabled}}>Submit Task</BsButton>
-
+  </div>
   {{#paper-switch value=sortBy onChange=(action (mut sortBy))}}
     {{if sortBy 'Most Recent' 'Oldest'}}
   {{/paper-switch}}
-  </div>
-</div>
+
+
 {{#if (lte model.length 0) }}
   <h1 class='text-center'>NO TASKS</h1>
 {{else}}
